@@ -1,11 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Repositories;
+using Entities;
 
 namespace Services
 {
 	public class SearchService
 	{
+		private SearchRepository _repository { get; }
+
+		public SearchService(string connString)
+		{
+			this._repository = new SearchRepository(connString);
+		}
+
 		private enum SearchDirection
 		{
 			Horizontal = 1,
@@ -38,6 +47,16 @@ namespace Services
 			int[,] matchingCoordinates = this.TransformListOfTuplesInto2DArray(coordinates);
 
 			return matchingCoordinates;
+		}
+
+		public IEnumerable<SearchRecord> GetRecords()
+		{
+			return this._repository.GetRecords();
+		}
+
+		public int CreateRecord(string search, bool result, DateTime timestamp)
+		{
+			return this._repository.CreateRecord(search, result, timestamp);
 		}
 
 		#endregion

@@ -11,8 +11,7 @@ namespace Telefe_Examen_API
 
 			config.Routes.MapHttpRoute(
 				name: "DefaultApi",
-				routeTemplate: "api/{controller}/{word}",
-				defaults: new { word = RouteParameter.Optional }
+				routeTemplate: "api/{controller}"
 			);
 		}
 	}
