@@ -6,13 +6,13 @@ using Entities;
 
 namespace Services
 {
-	public class SearchService
+	public class SearchService : ISearchService
 	{
-		private SearchRepository _repository { get; }
+		private ISearchRepository _repository { get; set; }
 
-		public SearchService(string connString)
+		public SearchService(ISearchRepository searchRepository)
 		{
-			this._repository = new SearchRepository(connString);
+			this._repository = searchRepository;
 		}
 
 		private enum SearchDirection
@@ -38,7 +38,7 @@ namespace Services
 
 		#region Public Methods
 
-		public int[,] GetCoordenates(string[] sequence, string word)
+		public int[,] GetCoordinates(string[] sequence, string word)
 		{
 			char[,] matrix = this.TransformSequenceIntoMatrix(sequence);
 

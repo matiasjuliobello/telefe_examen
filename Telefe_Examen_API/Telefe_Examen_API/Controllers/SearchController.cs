@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Net;
-using System.Net.Http;
 using System.Text;
 using System.Web.Http;
 using System.Web.Http.Results;
@@ -16,9 +14,14 @@ namespace Telefe_Examen_API.Controllers
 	[RoutePrefix("api/search")]
 	public class SearchController : ApiController
 	{
-		private static readonly string[] _sequence = { "AGVNFT", "XJILSB", "CHAOHD", "ERCVTQ", "ASOYAO", "ERMYUA", "TELEFE" };
+		private readonly ISearchService _searchService;
 
-		private static readonly string _connString = ConfigurationManager.AppSettings["connString"];
+		public SearchController(ISearchService searchService)
+		{
+			this._searchService = searchService;
+		}
+
+		private static readonly string[] _sequence = { "AGVNFT", "XJILSB", "CHAOHD", "ERCVTQ", "ASOYAO", "ERMYUA", "TELEFE" };
 
 		private static readonly JsonSerializerSettings _serializerSettings = new JsonSerializerSettings
 		{
@@ -26,19 +29,16 @@ namespace Telefe_Examen_API.Controllers
 			ContractResolver = new CamelCasePropertyNamesContractResolver()
 		};
 
-		public IHttpActionResult Index()
-		{
-			return new ResponseMessageResult(new HttpResponseMessage(HttpStatusCode.NoContent));
-		}
-		[Route("{word}")]
+		[Route("")]
 		[HttpGet]
-		public IHttpActionResult Get(string word)
+		public IHttpActionResult GetCoordinates([FromUri] string word = null)
 		{
-			var searchService = new SearchService(_connString);
+			if (string.IsNullOrEmpty(word))
+				return BadRequest();
 
-			int[,] coordenates = searchService.GetCoordenates(_sequence, word);
+			int[,] coordenates = _searchService.GetCoordinates(_sequence, word);
 
-			int record_id = searchService.CreateRecord(word, coordenates.Length > 0, DateTime.Now);
+			int record_id = _searchService.CreateRecord(word, coordenates.Length > 0, DateTime.Now);
 
 			return new JsonResult<int[,]>(coordenates, _serializerSettings, Encoding.UTF8, this);
 		}
@@ -47,9 +47,7 @@ namespace Telefe_Examen_API.Controllers
 		[HttpGet]
 		public IHttpActionResult GetRecords()
 		{
-			var searchService = new SearchService(_connString);
-
-			IEnumerable<SearchRecord> records = searchService.GetRecords();
+			IEnumerable<SearchRecord> records = _searchService.GetRecords();
 
 			return new JsonResult<IEnumerable<SearchRecord>>(records, _serializerSettings, Encoding.UTF8, this);
 		}

@@ -8,8 +8,8 @@ using Entities;
 
 namespace Repositories
 {
-    public class SearchRepository : BaseRepository
-    {
+    public class SearchRepository : BaseRepository, ISearchRepository
+	{
 	    public SearchRepository(string connString) : base(connString)
 	    {
 	    }

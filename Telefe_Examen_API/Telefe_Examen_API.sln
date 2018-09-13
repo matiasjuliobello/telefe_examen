@@ -13,6 +13,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entiti
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{F51D06FC-867D-4E94-8818-06482DBA9EC8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit Tests", "Unit Tests", "{58050622-032C-44AB-9269-21C332E6D30C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests.Services", "UnitTests.Services\UnitTests.Services.csproj", "{03D49F38-C1CE-4725-A436-6076A0448C88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests.Telefe_Examen_API", "UnitTests.Telefe_Examen_API\UnitTests.Telefe_Examen_API.csproj", "{634B6551-7079-4D76-8A87-5DA8600B33B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,8 +47,20 @@ Global
 		{F51D06FC-867D-4E94-8818-06482DBA9EC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F51D06FC-867D-4E94-8818-06482DBA9EC8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F51D06FC-867D-4E94-8818-06482DBA9EC8}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{03D49F38-C1CE-4725-A436-6076A0448C88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03D49F38-C1CE-4725-A436-6076A0448C88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03D49F38-C1CE-4725-A436-6076A0448C88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03D49F38-C1CE-4725-A436-6076A0448C88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{634B6551-7079-4D76-8A87-5DA8600B33B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{634B6551-7079-4D76-8A87-5DA8600B33B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{634B6551-7079-4D76-8A87-5DA8600B33B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{634B6551-7079-4D76-8A87-5DA8600B33B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{03D49F38-C1CE-4725-A436-6076A0448C88} = {58050622-032C-44AB-9269-21C332E6D30C}
+		{634B6551-7079-4D76-8A87-5DA8600B33B7} = {58050622-032C-44AB-9269-21C332E6D30C}
 	EndGlobalSection
 EndGlobal
